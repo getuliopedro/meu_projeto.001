@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Cadastro</title>
+</head>
+<body>
+    <h1>Cadastro de Pessoas</h1>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome"><br>
+
+    <label for="data">Data de Nascimento:</label>
+    <input type="text" id="data"><br>
+
+    <label for="documento">Número de Documento:</label>
+    <input type="text" id="documento"><br>
+
+    <button onclick="cadastrarPessoa()">Cadastrar</button>
+
+    <h2>Lista de Cadastros:</h2>
+    <ul id="listaCadastros"></ul>
+
+    <script>
+        // Array para armazenar os cadastros
+        var cadastros = [];
+
+        // Função para cadastrar uma pessoa
+        function cadastrarPessoa() {
+            var nome = document.getElementById("nome").value;
+            var data = document.getElementById("data").value;
+            var documento = document.getElementById("documento").value;
+
+            if (nome === "" || data === "" || documento === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            var cadastro = {
+                Nome: nome,
+                "Data de Nascimento": data,
+                "Número de Documento": documento
+            };
+
+            cadastros.push(cadastro);
+
+            // Limpa os campos de entrada
+            document.getElementById("nome").value = "";
+            document.getElementById("data").value = "";
+            document.getElementById("documento").value = "";
+
+            listarCadastros();
+        }
+
+        // Função para listar os cadastros
+        function listarCadastros() {
+            var listaCadastros = document.getElementById("listaCadastros");
+            listaCadastros.innerHTML = "";
+
+            for (var i = 0; i < cadastros.length; i++) {
+                var cadastro = cadastros[i];
+                var itemLista = document.createElement("li");
+                itemLista.textContent = "Nome: " + cadastro.Nome + ", Data de Nascimento: " + cadastro["Data de Nascimento"] + ", Número de Documento: " + cadastro["Número de Documento"];
+                listaCadastros.appendChild(itemLista);
+            }
+        }
+    </script>
+</body>
+</html>
